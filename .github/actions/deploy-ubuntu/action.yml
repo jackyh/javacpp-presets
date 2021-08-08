@@ -33,8 +33,9 @@ runs:
         echo "PREFIX=$PREFIX" >> $GITHUB_ENV
 
         apt-get update
-        apt-get -y install gnupg lsb-release
-        export CODENAME=$(lsb_release -cs)
+        apt-get -y install gnupg
+        source /etc/os-release
+        export CODENAME=$UBUNTU_CODENAME
 
         if [[ "$CI_DEPLOY_PLATFORM" == "linux-armhf" ]] && [[ -z ${CI_DEPLOY_NEED_NOTOOLS:-} ]]; then
           echo Setting up tools for linux-armhf build
